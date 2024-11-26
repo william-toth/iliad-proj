@@ -10,7 +10,7 @@ To run my code, please do the following
 3. Run this command in your terminal: `dotnet run {maxDegreeOfParallelism}`
 
 ## Notes
-- The core logic for this is located in `Program.cs`
+- The core logic for my submission is located in `Program.cs`
 - I added the `maxDegreeOfParrelism` flag to allow the user to set the number of threads that the program will use. This is because every machine is different and will run into resources contention / memory issues at different thread counts. On my machine (2021 M1), for example, I could get up to about 3500 threads before running into issues
 
 ## Results
