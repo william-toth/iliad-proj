@@ -1,0 +1,15 @@
+/Users/williamtoth/Desktop/iliad-proj/obj/Debug/net9.0/iliad-proj.GeneratedMSBuildEditorConfig.editorconfig
+/Users/williamtoth/Desktop/iliad-proj/obj/Debug/net9.0/iliad-proj.AssemblyInfoInputs.cache
+/Users/williamtoth/Desktop/iliad-proj/obj/Debug/net9.0/iliad-proj.AssemblyInfo.cs
+/Users/williamtoth/Desktop/iliad-proj/obj/Debug/net9.0/iliad-proj.csproj.CoreCompileInputs.cache
+/Users/williamtoth/Desktop/iliad-proj/obj/Debug/net9.0/iliad-proj.sourcelink.json
+/Users/williamtoth/Desktop/iliad-proj/bin/Debug/net9.0/iliad-proj
+/Users/williamtoth/Desktop/iliad-proj/bin/Debug/net9.0/iliad-proj.deps.json
+/Users/williamtoth/Desktop/iliad-proj/bin/Debug/net9.0/iliad-proj.runtimeconfig.json
+/Users/williamtoth/Desktop/iliad-proj/bin/Debug/net9.0/iliad-proj.dll
+/Users/williamtoth/Desktop/iliad-proj/bin/Debug/net9.0/iliad-proj.pdb
+/Users/williamtoth/Desktop/iliad-proj/obj/Debug/net9.0/iliad-proj.dll
+/Users/williamtoth/Desktop/iliad-proj/obj/Debug/net9.0/refint/iliad-proj.dll
+/Users/williamtoth/Desktop/iliad-proj/obj/Debug/net9.0/iliad-proj.pdb
+/Users/williamtoth/Desktop/iliad-proj/obj/Debug/net9.0/iliad-proj.genruntimeconfig.cache
+/Users/williamtoth/Desktop/iliad-proj/obj/Debug/net9.0/ref/iliad-proj.dll
