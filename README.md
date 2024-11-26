@@ -15,12 +15,12 @@ To run my code, please do the following
 
 ## Results
 
-Sum of all scores: 9641308394
+Sum of all scores: **9641308394**
 
 Fastest run: 32.5 seconds at ~3600 max degreee of parallelism
 
 
-Because the runtime of the program depends on the machine, I believe I could reach much faster times (potentially sub 20 seconds) on a newer computer with more CPU/Memory, such as a 2024 M4 Macbook Pro, but would probably hit slower times on a less powerful machine
+Because the runtime of the program depends on the machine, I believe I could reach much faster times (potentially sub 20 seconds) on a newer computer with more CPU/Memory that can handle running 5k+ threads at once, such as a 2024 M4 Macbook Pro, but would probably hit slower times on a less powerful machine.
 
 ## Stretegies
 
