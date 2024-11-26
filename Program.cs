@@ -8,10 +8,9 @@ using System.Diagnostics;
 class Program
 {
     static long sum = 0; // Total sum
-    static object counterLock = new object(); // Lock for changing global variables
-
+    static object sumLock = new object();
     static Dictionary<string,long> resultsCache = new Dictionary<string,long>(); // Results cache for lines we've seen before
-
+    static object resultsCacheLock = new object();
     static async Task Main(string[] args)
     {
         // Start Timer
@@ -47,7 +46,15 @@ class Program
 
                     try
                     {
-                        await ProcessLineAsync(client, url, line);
+                        if (resultsCache.ContainsKey(line)) {
+                            lock (sumLock)
+                            {
+                                sum += resultsCache[line];
+                            }
+                        }
+                        else {
+                            await ProcessLineAsync(client, url, line);
+                        }
                     }
                     finally
                     {
@@ -63,56 +70,47 @@ class Program
         stopWatch.Stop();
         TimeSpan ts = stopWatch.Elapsed;
 
-        string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}",
-        ts.Hours, ts.Minutes, ts.Seconds);
-        Console.WriteLine("Sum of all scores: " + sum.ToString());
-        Console.WriteLine("RunTime: " + elapsedTime);
+        double elapsedTime = Math.Round(ts.TotalSeconds, 1);
+        Console.WriteLine($"Sum of all scores: {sum}");
+        Console.WriteLine($"RunTime: {elapsedTime} seconds" );
     }
 
     static async Task ProcessLineAsync(HttpClient client, string url, string line)
     {
-        // If we've seen a line before, no need to send an HTTP request
-        if (resultsCache.ContainsKey(line)) {
-            lock (counterLock)
-            {
-                sum += resultsCache[line];
-            }
-        }
-        else
-        {
-            var content = new StringContent(line, Encoding.UTF8, "application/json");
+        var content = new StringContent(line, Encoding.UTF8, "application/json");
+        var success = false;
 
-            var success = false;
+        // Retry until we succeed
+        while (!success) {
+            try {
+                HttpResponseMessage response = await client.PostAsync(url, content);
+                if (response.IsSuccessStatusCode)
+                {
+                    var jsonResponse = await response.Content.ReadAsStreamAsync();
+                    var deserializedResult = await JsonSerializer.DeserializeAsync<Dictionary<string, long>>(jsonResponse) ?? new Dictionary<string,long>();
 
-            // Retry until we succeed
-            while (!success) {
-                try {
-                    HttpResponseMessage response = await client.PostAsync(url, content);
-                    if (response.IsSuccessStatusCode)
+                    if (deserializedResult.TryGetValue("score", out var score))
                     {
-                        var jsonResponse = await response.Content.ReadAsStreamAsync();
-                        var deserializedResult = await JsonSerializer.DeserializeAsync<Dictionary<string, long>>(jsonResponse);
-
-                        if (deserializedResult != null) {
-                            if (deserializedResult.TryGetValue("score", out long score))
+                        // Add to cache
+                        if (!resultsCache.ContainsKey(line))
+                        {
+                            lock (resultsCacheLock)
                             {
-                                lock (counterLock)
-                                {
-                                    // Add to cache if seen before
-                                    if (!resultsCache.ContainsKey(line)) {
-                                        resultsCache.Add(line, score);
-                                    }
-                                    sum += score;
-                                }
+                                resultsCache.Add(line, score);
                             }
+
                         }
-                        success = true;
+
+                        // Increment sum
+                        lock (sumLock)
+                        {
+                            sum += score;
+                        }
                     }
-                }
-                catch {
-                    success = false;
+                    success = true;
                 }
             }
+            catch { }
         }
     }
 }

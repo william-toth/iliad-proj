@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("iliad-proj")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9a9081492cf9144057100dbb0d178f446ea90c3b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e62b9a74c8f6ff4a9f53dd47f4584bb58fdf6c94")]
 [assembly: System.Reflection.AssemblyProductAttribute("iliad-proj")]
 [assembly: System.Reflection.AssemblyTitleAttribute("iliad-proj")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
